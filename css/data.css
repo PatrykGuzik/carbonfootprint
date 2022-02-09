@@ -1,0 +1,30 @@
+table {
+	margin-top: 20px;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	/* width: 2222px; */
+}
+
+td,
+th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+
+.code-description {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.download-button{
+    margin-top: 10px;
+}
+
+.codes{
+    margin-left: 20px;
+}
