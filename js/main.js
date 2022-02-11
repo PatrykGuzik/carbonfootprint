@@ -22,7 +22,7 @@ function displayLoading(){
 
 	setTimeout(()=>{
 		loader.classList.remove("display")
-	},5000)
+	},50000)
 }
 
 function hideLoading(){
@@ -33,11 +33,11 @@ function hideLoading(){
 
 displayLoading();
 
-fetch("http://127.0.0.1:8000/api/questions/?format=json")
+fetch("https://guziczek772.pythonanywhere.com/api/questions/?format=json")
 	.then(response => response.json())
 	.then(data => drawForms(data));
 
-fetch("http://127.0.0.1:8000/api/informations/?format=json")
+fetch("https://guziczek772.pythonanywhere.com/api/informations/?format=json")
 	.then(response => response.json())
 	.then(data => DrawInfo(data));
 

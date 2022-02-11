@@ -1,7 +1,7 @@
 const answersToSend = {};
 
 function getCalcValues() {
-	fetch("http://127.0.0.1:8000/api/values/?format=json")
+	fetch("https://guziczek772.pythonanywhere.com/api/values/?format=json")
 		.then(response => response.json())
 		.then(data => saveToCalcAnswers(data));
 }
@@ -15,7 +15,7 @@ function sendToBase() {
 		answers: toSendAnswers,
 		calc_answers: toSendCalcAnswers,
 	};
-	fetch("http://127.0.0.1:8000/api/answers/?format=json", {
+	fetch("https://guziczek772.pythonanywhere.com/api/answers/?format=json", {
 		method: "POST",
 		body: JSON.stringify(_data),
 		headers: { "Content-type": "application/json; charset=UTF-8" },
