@@ -91,7 +91,7 @@ function myFunction(data) {
 
 			row = [];
 			rowTableBody = "<tr>";
-			let transportSuma = 0;
+			let suma = 0;
 
 			row.push(filterData[i].id);
 			row.push(filterData[i].code);
@@ -99,33 +99,36 @@ function myFunction(data) {
 			rowTableBody += `<td>${filterData[i].id}</td>`;
 			rowTableBody += `<td>${filterData[i].code}</td>`;
 
-			console.log(Object.keys(JSONData));
 			
 			for (let j = 0; j < JSONDataLength; j++) {
 				// console.log(Object.values(JSONData)[j]);
+				row.push(Object.values(JSONData)[j]);
+				suma += Object.values(JSONData)[j];
 				// TODO sprawdzić czy się zapisuje w odpowiedniej kolejności
 				rowTableBody += `<td>${Object.values(JSONData)[j]}</td>`;
 			}
 
 			csvFileData.push(row);
+			console.log(row);
 
 			if (i == 0) {
 				for (let j = 0; j < JSONDataLength; j++) {
 					header += `${Object.keys(JSONData)[j]}`;
 					tableHeader += `<th>${Object.keys(JSONData)[j]}</th>`;
-					if (j < JSONDataLength) header += ",";
+					if (j < JSONDataLength-1) header += ",";
 					else header += "\n";
 				}
 			}
 
-			rowTableBody += `<th>${transportSuma.toFixed(2)}</th></tr>`;
+			// rowTableBody += `<th>${suma.toFixed(2)}</th></tr>`;
 
 			tableBody += rowTableBody;
 		}
 
-		tableHeader += "<th>suma[kg]</th></tr>";
+		// console.log(csvFileData);
+		tableHeader += "</tr>";
 		csv += header;
-
+		// csv += "\n";
 		csvFileData.forEach(function (row) {
 			csv += row.join(",");
 			csv += "\n";
