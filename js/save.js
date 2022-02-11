@@ -819,11 +819,11 @@ function saveToCalcAnswers(data) {
 	sessionStorage.setItem("KONSUMPCJA", KONSUMPCJA);
 	// Wysyłamy dane do bazy
 	sendToBase();
-
-	// Przekierowanie
-	// location.href="finish.html";
-
 	console.log(answersToSend);
+	// Przekierowanie
+	location.href="finish.html";
+
+	
 	// console.log("wysłane");
 
 	// Dodatkowe funkcje

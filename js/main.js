@@ -110,7 +110,7 @@ function drawForms(d) {
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
-			location.href = "finish.html";
+			// location.href = "finish.html";
 			console.log("wysłane");
 		}
 	});
@@ -122,7 +122,7 @@ function drawForms(d) {
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
-			location.href = "finish.html";
+			// location.href = "finish.html";
 			console.log("wysłane");
 		}
 	});
