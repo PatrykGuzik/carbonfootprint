@@ -688,7 +688,10 @@ function saveToCalcAnswers(data) {
 	//zakupy -> stac/internet
 	zakupyJakOdp = answersE["K_sklepy"];
 	zakupyJakCzestoOdp = answersE["K_zakupyCzest"];
-
+	sklStac = getValue("sklStac");
+	sklInPl = getValue("sklInPl");
+	sklInEu = getValue("sklInEu");
+	sklInMK = getValue("sklInMK");
 
 	sklepValue = 0;
 	switch (zakupyJakOdp) {
