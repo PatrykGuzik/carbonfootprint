@@ -21,6 +21,7 @@
 .slider-value{
     background-color: var(--rangeColor);
     color: var(--whellColor);
+	min-width: 60px;
     font-size: 14px;
 	font-weight: 500;
     display: inline-block;

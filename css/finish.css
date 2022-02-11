@@ -34,24 +34,50 @@ body {
 	flex-direction: column;
 }
 
-.test {
-    margin:20px;
-	width: 500px;
-	height: 200px;
-    border-radius: 7px;
+.finish-info {
+	margin: 20px;
+	width: 600px;
+	padding: 30px 50px;
+	border-radius: 7px;
 	background-color: rgba(0, 0, 0, 0.411);
 }
+
+.finish-info-box {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.finish-info-box img {
+	width: 120px;
+}
+
+.finish-info p {
+	font-size: 15px;
+	font-weight: 600;
+}
+.finish-info-box p {
+	width: 200px;
+	margin-right: 50px;
+	font-weight: 400;
+}
+
+.ziemia {
+	margin-left: 50px;
+}
+
 /* ------------------Content------------- */
 
 .rating {
 	margin: 20px;
 	padding: 20px;
 	border-radius: 7px;
-    font-size: 19px;
+	font-size: 19px;
 }
 
 .btn-tip {
-    margin-top: 30px;
+	margin-top: 30px;
 	font-size: 16px;
 	right: 0;
 	padding: 8px 20px;
@@ -60,37 +86,45 @@ body {
 	border-radius: 7px;
 }
 
-.btn-tip:hover{
-    cursor: pointer;
+.btn-tip:hover {
+	cursor: pointer;
 }
 
 /* -----result----- */
-.stats-world, .details{
-    display: flex;
+.stats-world,
+.details {
+	display: flex;
 	width: 100%;
 	justify-content: center;
 }
 
 .result {
 	margin: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content:end;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: center;
 }
-.result-value, .result-describe{
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-weight: 500;
+.result-value,
+.result-describe {
+	margin-top: 10px;
+	margin-bottom: 5px;
+	font-weight: 500;
 }
-.result-bar{
-    width: 20px;
-    background-color: #FFAE34;
-    border-radius: 10px;
+.result-bar {
+	width: 20px;
+	background-color: #ffae34;
+	border-radius: 10px;
+}
+
+.result .arrow{
+	width: 19px;
+	height: 19px;
+	border-top: 3px solid rgba(255, 31, 31, 0.8);
+	border-left: 3px solid rgba(255, 31, 31, 0.8);;
+	transform:translateY(20%) rotate(45deg) ;
 }
 /* ---------------------- */
-
-
 
 /* --------------accesories------------ */
 .logo {
@@ -160,6 +194,3 @@ body {
 ::-webkit-scrollbar-track-piece {
 	background-color: transparent;
 }
-
-
-

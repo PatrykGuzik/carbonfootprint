@@ -26,7 +26,7 @@ function activateCodeContainer() {
 }
 
 function CheckCode(codeInput) {
-	fetch("https://guziczek772.pythonanywhere.com/api/codes/?format=json")
+	fetch("http://127.0.0.1:8000/api/codes/?format=json")
 		.then(response => response.json())
 		.then(data => Check(data, codeInput));
 }
@@ -34,7 +34,6 @@ function CheckCode(codeInput) {
 function Check(data, codeInput) {
 	isCodeInBase = false;
 	const wrongCode = document.querySelector(".wrong-code");
-	console.log(data);
 
 	for (let i = 0; i < data.length; i++) {
 		if (data[i].code == codeInput) isCodeInBase = true;

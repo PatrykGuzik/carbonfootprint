@@ -5,7 +5,6 @@
 // const transport = document.querySelector(".transport")
 // transport.innerHTML = Number.parseFloat(sessionStorage.getItem('TRANSPORT')).toFixed(2);
 
-
 // ----dane---
 const SWIAT = 4.9;
 const POLSKA = 9;
@@ -13,37 +12,55 @@ const KIRGISTAN = 13;
 const SUDAN = 7.1;
 const ROSJA = 10.5;
 
-const TRANSPORT = Number.parseFloat(sessionStorage.getItem('TRANSPORT')/1000);
-const ODPADY = Number.parseFloat(sessionStorage.getItem('ODPADY')/1000);
-const ENERGIA_DOMU = Number.parseFloat(sessionStorage.getItem('ENERGIA_DOMU')/1000);
-const JEDZENIE = Number.parseFloat(sessionStorage.getItem('JEDZENIE')/1000);
-const CZAS_WOLNY = Number.parseFloat(sessionStorage.getItem('CZAS_WOLNY')/1000);
-const KONSUMPCJA = Number.parseFloat(sessionStorage.getItem('KONSUMPCJA')/1000);
+// zmienic na const
+let TRANSPORT = Number.parseFloat(sessionStorage.getItem("TRANSPORT") / 1000);
+let ODPADY = Number.parseFloat(sessionStorage.getItem("ODPADY") / 1000);
+let ENERGIA_DOMU = Number.parseFloat(
+	sessionStorage.getItem("ENERGIA_DOMU") / 1000
+);
+let JEDZENIE = Number.parseFloat(sessionStorage.getItem("JEDZENIE") / 1000);
+let CZAS_WOLNY = Number.parseFloat(
+	sessionStorage.getItem("CZAS_WOLNY") / 1000
+);
+let KONSUMPCJA = Number.parseFloat(
+	sessionStorage.getItem("KONSUMPCJA") / 1000
+);
 console.log(TRANSPORT + ODPADY);
 
-const SUMA = TRANSPORT + ODPADY + ENERGIA_DOMU + JEDZENIE + CZAS_WOLNY + KONSUMPCJA;
+//Dev
+// TRANSPORT = 3.5;
+// ODPADY = 1.2;
+// ENERGIA_DOMU = 0.3;
+// JEDZENIE = 2.3;
+// CZAS_WOLNY = 1.1
+// KONSUMPCJA = 2.2;
 
-const RED = '#FF3939'
-const GREEN = '#5A9D55';
-const YELLOW = '#FFAE34';
 
+
+
+const SUMA =
+	TRANSPORT + ODPADY + ENERGIA_DOMU + JEDZENIE + CZAS_WOLNY + KONSUMPCJA;
+
+const RED = "#FF3939";
+const GREEN = "#5A9D55";
+const YELLOW = "#FFAE34";
 
 const detailsList = {
-    "TRANSPORT":TRANSPORT,
-    "ODPADY":ODPADY,
-    "ENERGIA DOMU":ENERGIA_DOMU,
-    "JEDZENIE":JEDZENIE,
-    "CZAS WOLNY":CZAS_WOLNY,
-    "KONSUMPCJA":KONSUMPCJA
-}
+	TRANSPORT: TRANSPORT,
+	ODPADY: ODPADY,
+	"ENERGIA DOMU": ENERGIA_DOMU,
+	JEDZENIE: JEDZENIE,
+	"CZAS WOLNY": CZAS_WOLNY,
+	KONSUMPCJA: KONSUMPCJA,
+};
 
 const statsList = {
 	"Twój wynik": SUMA,
-	"Świat": SWIAT,
-	"Polska": POLSKA,
-	"Kirgistan": KIRGISTAN,
-	"Sudan": SUDAN,
-	"Rosja": ROSJA,
+	Świat: 4.9,
+	Polska: 8,
+	Chiny: 7.4,
+	USA: 14.2,
+	Meksyk: 2.7,
 };
 console.log("suma: " + SUMA);
 
@@ -69,8 +86,6 @@ if (SUMA >= POLSKA - 1 && SUMA <= POLSKA + 1) {
 	rating.style.backgroundColor = "rgba(255, 200, 50, 0.8)";
 }
 
-
-
 //------------------------------STATYSTYKI------------------------------
 
 const statsWorld = document.querySelector(".stats-world");
@@ -78,11 +93,20 @@ let statsWorldInner = "";
 
 for (let i = 0; i < Object.keys(statsList).length; i++) {
 	value = Object.values(statsList)[i].toFixed(1);
+	heightBar = value *6;
+	arrow = ''
+	if (value > 30){
+		heightBar = 30 * 6;
+		arrow = `<div class="arrow"></div>`
+	} 
 	describe = Object.keys(statsList)[i];
-    barColor = changeBarColor(value);
+	barColor = changeBarColor(value);
 	statsWorldInner += `<div class="result">
                             <div class="result-value">${value}t</div>
-                            <div class="result-bar" style="height:${value * 6}px; background-color:${barColor}"></div>
+							${arrow}
+                            <div class="result-bar" style="height:${
+								heightBar
+										}px; background-color:${barColor}"></div>
                             <div class="result-describe">${describe}</div>
                         </div>
                         `;
@@ -96,25 +120,25 @@ function changeBarColor(value) {
 	if (value >= POLSKA - 1 && value <= POLSKA + 1) return YELLOW;
 }
 
-
 //---------------------------szczegóły-----------------------------
 const details = document.querySelector(".details");
 let detailsInner = "";
 
 for (let i = 0; i < Object.keys(detailsList).length; i++) {
 	value = Object.values(detailsList)[i];
-    percent = value*100/SUMA;
-    percentFixed = Number.parseFloat(percent).toFixed(1)
+	percent = (value * 100) / SUMA;
+	percentFixed = Number.parseFloat(percent).toFixed(1);
 	describe = Object.keys(detailsList)[i];
-    barColor = changeBarColor(value);
+	barColor = changeBarColor(value);
 	detailsInner += `<div class="result">
                         <div class="result-value">${percentFixed}%</div>
-                        <div class="result-bar" style="height:${percentFixed*2}px"></div>
+                        <div class="result-bar" style="height:${
+													percentFixed * 2
+												}px"></div>
                         <div class="result-describe">${describe}</div>
                     </div>
                         `;
 }
-
 
 details.innerHTML = detailsInner;
 
@@ -139,7 +163,6 @@ for (let i = 0; i < 15; i++) {
 
                             </div>`;
 }
-
 
 mediaScroller.innerHTML = mediaScrollerInner;
 
