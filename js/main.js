@@ -22,7 +22,7 @@ function displayLoading(){
 
 	setTimeout(()=>{
 		loader.classList.remove("display")
-	},50000)
+	},60000)
 }
 
 function hideLoading(){

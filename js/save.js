@@ -689,10 +689,6 @@ function saveToCalcAnswers(data) {
 	zakupyJakOdp = answersE["K_sklepy"];
 	zakupyJakCzestoOdp = answersE["K_zakupyCzest"];
 
-	sklStac = getValue("sklStac");
-	sklInPl = getValue("sklInPl");
-	sklInEu = getValue("sklInEu");
-	sklInMK = getValue("sklInMK");
 
 	sklepValue = 0;
 	switch (zakupyJakOdp) {
@@ -760,7 +756,7 @@ function saveToCalcAnswers(data) {
 	zakKosmetyki = getValue("zakKosmetyki");
 
 	answersToSend["K_kosmetyki"] = kosmetykiIleOdp*zakKosmetyki*12;
-	console.log(answersToSend["K_kosmetyki"]);
+	
 
 	//elektronika
 	elekIleOdp = answersE["K_sprzetyEle"];
@@ -791,7 +787,7 @@ function saveToCalcAnswers(data) {
 			break;
 	}
 	answersToSend["K_elektr"] = elekValue;
-	console.log(answersToSend["K_elektr"]);
+
 
 	//
 	//=========================================================================
