@@ -1,7 +1,7 @@
 const answersToSend = {};
 
 function getCalcValues() {
-	fetch("https://guziczek772.pythonanywhere.com/api/values/?format=json")
+	fetch("http://127.0.0.1:8000/api/values/?format=json")
 		.then(response => response.json())
 		.then(data => saveToCalcAnswers(data));
 }
@@ -15,7 +15,7 @@ function sendToBase() {
 		answers: toSendAnswers,
 		calc_answers: toSendCalcAnswers,
 	};
-	fetch("https://guziczek772.pythonanywhere.com/api/answers/?format=json", {
+	fetch("http://127.0.0.1:8000/api/answers/?format=json", {
 		method: "POST",
 		body: JSON.stringify(_data),
 		headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -143,7 +143,7 @@ function saveToCalcAnswers(data) {
 			ileRazySamolotem * jakDlugoSamolotem * getValue("samolot");
 	}
 
-	//---------------------------ENERGIA DOMU-----------------------------
+	//----------------------------------------------------ENERGIA DOMU-------------------------------------------------------
 	// energooszczednosc budynku E_budynekEfficient
 	domPasywny = getValue("domPasywny");
 	domEnergooszczedny = getValue("domEnergooszczedny");
@@ -364,6 +364,7 @@ function saveToCalcAnswers(data) {
 	answersToSend["E_pranie"] = pranieToSend;
 
 	osobWMieszk = answersE["E_mieszkaOsoby"];
+	if (osobWMieszk == 0) osobWMieszk = 1;
 
 	ENERGIA_DOMU =
 		(answersToSend["E_budynekEfficient"] + answersToSend["E_prad"]) /
@@ -371,6 +372,8 @@ function saveToCalcAnswers(data) {
 		(answersToSend["E_prysznic"] +
 			answersToSend["E_kapiel"] +
 			answersToSend["E_kolektory"] / osobWMieszk);
+
+	console.log("energia domu - " + ENERGIA_DOMU);
 
 	//---------------------------ODPADY-----------------------------------
 
@@ -688,6 +691,7 @@ function saveToCalcAnswers(data) {
 	//zakupy -> stac/internet
 	zakupyJakOdp = answersE["K_sklepy"];
 	zakupyJakCzestoOdp = answersE["K_zakupyCzest"];
+
 	sklStac = getValue("sklStac");
 	sklInPl = getValue("sklInPl");
 	sklInEu = getValue("sklInEu");
@@ -759,7 +763,7 @@ function saveToCalcAnswers(data) {
 	zakKosmetyki = getValue("zakKosmetyki");
 
 	answersToSend["K_kosmetyki"] = kosmetykiIleOdp*zakKosmetyki*12;
-	
+	console.log(answersToSend["K_kosmetyki"]);
 
 	//elektronika
 	elekIleOdp = answersE["K_sprzetyEle"];
@@ -790,7 +794,7 @@ function saveToCalcAnswers(data) {
 			break;
 	}
 	answersToSend["K_elektr"] = elekValue;
-
+	console.log(answersToSend["K_elektr"]);
 
 	//
 	//=========================================================================
@@ -820,13 +824,14 @@ function saveToCalcAnswers(data) {
 	sessionStorage.setItem("JEDZENIE", JEDZENIE);
 	sessionStorage.setItem("CZAS_WOLNY", CZAS_WOLNY);
 	sessionStorage.setItem("KONSUMPCJA", KONSUMPCJA);
+	sessionStorage.setItem("answers", JSON.stringify(answersToSend));
 	// Wysyłamy dane do bazy
 	sendToBase();
-	console.log(answersToSend);
-	// Przekierowanie
-	location.href="finish.html";
 
-	
+	// Przekierowanie
+	// location.href="finish.html";
+
+	// console.log(answersToSend);
 	// console.log("wysłane");
 
 	// Dodatkowe funkcje

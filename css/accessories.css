@@ -1,6 +1,3 @@
-:root{
-    
-}
 
 .logo{
 	position: fixed;
@@ -18,7 +15,14 @@
 	background-color: #4D8748;
 	color: white;
 	border-radius: 7px 0 0 7px;
+	transform: translateX(6%);
+	transition: transform 0.3s;
+
 }
+.btn-support:hover{
+	transform: translateX(0);
+}
+
 
 .more-info{
 	color: white;
@@ -29,7 +33,7 @@
 }
 
 .more-info a{
-	color: yellowgreen;
+	color: 	#FFAE34;
 }
 
 .share{

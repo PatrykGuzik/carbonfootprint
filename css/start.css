@@ -52,7 +52,7 @@ body {
 
 .button-start{
     padding: 10px 35px;
-    background-color: rgb(34, 126, 11);
+    background-color: #4D8748;
     border-radius: 5px;
     color: white;
     font-size: 20px;
@@ -61,12 +61,11 @@ body {
 
 .button-start:hover{
     cursor: pointer;
-    background-color: rgb(49, 116, 33);
+    background-color: #54944e;
 }
 
 .container h3{
     margin-bottom: 20px;
-
 }
 
 .container p{
@@ -85,11 +84,12 @@ body {
 }
 
 .code-button .code-q-btn{
-    color: tomato;
+    color: #FFAE34;
 }
 
 .code-button .code-q-btn:hover{
-    color: rgb(253, 83, 53);
+    color: #FFAE34;
+    text-decoration: underline;
     cursor: pointer;
 }
 

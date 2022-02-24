@@ -14,10 +14,11 @@
 	border: none;
     z-index: 1;
     position: relative;
-    margin: 40px;
+    margin: 50px;
 	margin-top: 50px;
 	position: relative;
 	transition: transform 0.3s ;
+	mix-blend-mode: screen;
 }
 
 .btn::after{
@@ -32,7 +33,8 @@
 .btn-left::after{
 	border-bottom: 2px solid var(--leftRightArrowColor);
 	border-left: 2px solid var(--leftRightArrowColor);
-	transform: translate(-30%, -50%) rotate(45deg)
+	transform: translate(-30%, -50%) rotate(45deg);
+
 }
 
 .btn-right::after{
@@ -50,12 +52,13 @@
 
 .btn-next {
     display:inline-block;
-    padding: 8px 32px;
+    padding: 10px 32px;
     border: none;
     background-color: #4D8748;
     border-radius: 7px;
     color: white;
-    font-size: 20px;
+    font-size: 21px;
+	font-weight: 700;
     /* margin-bottom: 10px; */
 }
 

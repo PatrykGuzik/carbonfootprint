@@ -5,6 +5,7 @@
 
 .main-question-slider-percent{
 	margin-bottom: 20px;
+	font-size: var(--headerQuestionSize);
 }
 
 .slider-percent-value{
@@ -16,6 +17,11 @@
 	padding: 5px;
 	width: 80px;
 	background-color: var(--rangeColor);
+}
+
+.main-question-slider{
+	margin-bottom: 20px;
+	font-size: var(--headerQuestionSize);
 }
 
 .slider-value{

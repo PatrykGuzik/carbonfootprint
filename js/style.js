@@ -8,7 +8,7 @@ const settings =
 
 function setStyleTransport() {
     document.documentElement.style.setProperty('--bgImage', 'url(../img/transport.jpg)');
-    lightTheme();
+    darkTheme();
 }
 
 function setStyleHomeEnergy() {

@@ -14,7 +14,7 @@ class Info {
             info_box_inner += 
             `<div class="info-object">
                 <div class="info-img-box">
-                    <img class="info-img" src="img/path869.png" alt="">
+                    <img class="info-img" src="../img/path869.png" alt="">
                 </div>
                 <div class="info-content">
                     <h4>Czy wiesz że...</h4>

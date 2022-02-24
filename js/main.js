@@ -17,31 +17,32 @@ const btnNext = document.querySelector(".btn-next");
 //Loading---------------------------------------------------------------------------
 const loader = document.querySelector(".loading");
 
-function displayLoading(){
+function displayLoading() {
 	loader.classList.add("display");
 
-	setTimeout(()=>{
-		loader.classList.remove("display")
-	},60000)
+	setTimeout(() => {
+		loader.classList.remove("display");
+	}, 60000);
 }
 
-function hideLoading(){
-	loader.classList.remove("display")
+function hideLoading() {
+	loader.classList.remove("display");
 }
 
 //Fetch ---------------------------------------------------------------------------------------------------
 
 displayLoading();
 
-fetch("https://guziczek772.pythonanywhere.com/api/questions/?format=json")
+fetch("http://127.0.0.1:8000/api/questions/?format=json")
 	.then(response => response.json())
 	.then(data => drawForms(data));
 
-fetch("https://guziczek772.pythonanywhere.com/api/informations/?format=json")
+fetch("http://127.0.0.1:8000/api/informations/?format=json")
 	.then(response => response.json())
 	.then(data => DrawInfo(data));
 
 function DrawInfo(d) {
+	console.log("info załadowane");
 	info = new Info(d, ".info-box");
 	info.drawInfo();
 
@@ -49,6 +50,7 @@ function DrawInfo(d) {
 	const infoBox = document.querySelector(".info-box");
 	for (let i = 0; i < Object.keys(allFormObjects).length; i++) {
 		allFormObjects[i].addEventListener("input", () => {
+			console.log("show");
 			showAndHiddenInfo(d);
 			infoBox.style.opacity = "1";
 		});
@@ -71,10 +73,9 @@ function DrawInfo(d) {
 }
 
 function drawForms(d) {
-	setTimeout(()=>{
-		hideLoading()
-	},600)
-	
+	setTimeout(() => {
+		hideLoading();
+	}, 600);
 
 	let numbersOfQuestions = Object.keys(d).length;
 	//TODO: zmienić sposób ustalania ostatniej strony
@@ -89,10 +90,10 @@ function drawForms(d) {
 	form.drawInputsByType();
 	form.updateAndValidateInputs();
 
-// tymczasowe-------------------------
+	// tymczasowe-------------------------
 	setNumbersQuestionsForCounter();
 	// getNumbersQuestionsOnPage(d);
-//-------------------------------------
+	//-------------------------------------
 
 	const all_form_objects = document.querySelectorAll(".form-object");
 
@@ -100,43 +101,43 @@ function drawForms(d) {
 
 	bntLeft.addEventListener("click", () => {
 		if (page > 1) {
-			changePageIfIsValidate(form, false, d, all_form_objects, numbersOfPages);
+			changePageIfIsValidateLeft(form ,d, all_form_objects, numbersOfPages);
 		}
 	});
 
 	bntRight.addEventListener("click", () => {
 		if (page < numbersOfPages) {
-			changePageIfIsValidate(form, true, d, all_form_objects, numbersOfPages);
+			changePageIfIsValidateRight(form, d, all_form_objects, numbersOfPages);
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
-			// location.href = "finish.html";
+			location.href = "finish.html";
 			console.log("wysłane");
 		}
 	});
 
 	btnNext.addEventListener("click", () => {
 		if (page < numbersOfPages) {
-			changePageIfIsValidate(form, true, d, all_form_objects, numbersOfPages);
+			changePageIfIsValidateRight(form, d, all_form_objects, numbersOfPages);
 			console.log(answersE);
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
-			// location.href = "finish.html";
+			location.href = "finish.html";
 			console.log("wysłane");
 		}
 	});
 
 	// PRZYCISK TYMCZASOWY
-	// const bntTemp = document.querySelector(".btn-tmp");
-	// bntTemp.addEventListener("click", () => {
-	// 	if (page) {
-	// 		updateView(form, d, all_form_objects, numbersOfPages);
-	// 		getCalcValues();
-	// 		console.log("wysłane");
-	// 	}
-	// 	// getNrQuestionsInCategory(d);
-	// });
+	const bntTemp = document.querySelector(".btn-tmp");
+	bntTemp.addEventListener("click", () => {
+		if (page) {
+			updateView(form, d, all_form_objects, numbersOfPages);
+			getCalcValues();
+			console.log("wysłane");
+		}
+		// getNrQuestionsInCategory(d);
+	});
 }
 
 //---------------------------------------------------------------------------------
@@ -206,22 +207,30 @@ function updateView(form, formDate, inputs, numbersOfPages) {
 	// updatePageNr(numbersOfPages);
 }
 
-function changePageIfIsValidate(
+function changePageIfIsValidateRight(
 	form,
-	isRight,
 	formDate,
 	inputs,
 	numbersOfPages
 ) {
 	if (isValidate) {
 		form.updateConditionalQuestions();
-		if (isRight) changePageRight();
-		else changePageLeft();
-
+		changePageRight();
 		updateView(form, formDate, inputs, numbersOfPages);
 	} else {
 		form.validateForms();
 	}
+}
+
+function changePageIfIsValidateLeft(
+	form,
+	formDate,
+	inputs,
+	numbersOfPages
+) {
+	form.updateConditionalQuestions();
+	changePageLeft();
+	updateView(form, formDate, inputs, numbersOfPages);
 }
 
 // Info
@@ -255,8 +264,8 @@ function updateCategoryName(json) {
 				case "metryczka":
 					changeColorCat(0);
 					setStyleTransport();
-					setNrQuestionInCat("metryczka")
-					setQuestionNumber(page)
+					setNrQuestionInCat("metryczka");
+					setQuestionNumber(page);
 					break;
 
 				case "transport":
@@ -270,35 +279,35 @@ function updateCategoryName(json) {
 					changeColorCat(2);
 					setStyleHomeEnergy();
 					setNrQuestionInCat("energia_domu");
-					setQuestionNumber(page)
+					setQuestionNumber(page);
 					break;
 
 				case "odpady":
 					changeColorCat(3);
 					setStyleWaste();
 					setNrQuestionInCat("odpady");
-					setQuestionNumber(page)
+					setQuestionNumber(page);
 					break;
 
 				case "jedzenie":
 					changeColorCat(4);
 					setStyleFood();
 					setNrQuestionInCat("jedzenie");
-					setQuestionNumber(page)
+					setQuestionNumber(page);
 					break;
 
 				case "czas_wolny":
 					changeColorCat(5);
 					setStyleFreeTime();
 					setNrQuestionInCat("czas_wolny");
-					setQuestionNumber(page)
+					setQuestionNumber(page);
 					break;
 
 				case "konsumpcja":
 					changeColorCat(6);
 					setStyleConsumption();
 					setNrQuestionInCat("konsumpcja");
-					setQuestionNumber(page)
+					setQuestionNumber(page);
 					break;
 
 				default:
@@ -342,32 +351,27 @@ function getNumbersOfQuestionsOnPage() {
 	console.log(numbers);
 }
 
-
-
-
 const questionInCat = document.querySelectorAll(".q-in-cat");
-function setNrQuestionInCat(category){
+function setNrQuestionInCat(category) {
 	questionInCat.forEach(element => {
-		element.innerHTML= nrQuestionsInCategory[category]
+		element.innerHTML = nrQuestionsInCategory[category];
 	});
 }
 
-function setNumbersQuestionsForCounter(){
-	local_pages = 1
+function setNumbersQuestionsForCounter() {
+	local_pages = 1;
 	for (let i = 0; i < Object.keys(nrQuestionsInCategory).length; i++) {
 		for (let j = 0; j < Object.values(nrQuestionsInCategory)[i]; j++) {
-
 			// console.log(local_pages + "---" + (j+1) + "---" + Object.keys(nrQuestionsInCategory)[i]);
-			numbersQuestionsForCounter[local_pages] = (j+1);
+			numbersQuestionsForCounter[local_pages] = j + 1;
 
 			local_pages += 1;
 		}
 	}
-
 }
 
-let numbersQuestionsOnPage = {}
-function getNrQuestionsInCategory(data){
+let numbersQuestionsOnPage = {};
+function getNrQuestionsInCategory(data) {
 	a = [];
 	b = [];
 	nrQuestionsInCategory = {
@@ -379,12 +383,12 @@ function getNrQuestionsInCategory(data){
 		czas_wolny: 0,
 		konsumpcja: 0,
 	};
-	
-	for (let i = 0; i < Object.keys(data).length; i++){
+
+	for (let i = 0; i < Object.keys(data).length; i++) {
 		console.log();
-		if(!a.includes(data[i].page+data[i].kategoria)){
-			a.push(data[i].page+data[i].kategoria)
-			b.push(data[i].kategoria)
+		if (!a.includes(data[i].page + data[i].kategoria)) {
+			a.push(data[i].page + data[i].kategoria);
+			b.push(data[i].kategoria);
 		}
 	}
 
@@ -419,10 +423,8 @@ function getNrQuestionsInCategory(data){
 	return nrQuestionsInCategory;
 }
 
-
-
 const questionNumber = document.querySelectorAll(".q-nr");
-function setQuestionNumber(page){
+function setQuestionNumber(page) {
 	questionNumber.forEach(element => {
 		element.innerHTML = numbersQuestionsForCounter[page];
 	});

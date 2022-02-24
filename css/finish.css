@@ -11,6 +11,7 @@ body {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	box-sizing: border-box;
 }
 
 .parallax {
@@ -115,15 +116,38 @@ body {
 	width: 20px;
 	background-color: #ffae34;
 	border-radius: 10px;
+	animation: growBar 1s linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
+
+@keyframes growBar {
+	from {transform: translateY(50%) scaleY(0) ;}
+	to {transform: translateY(0px) scaleY(1) ;}
+  }
+
 
 .result .arrow{
 	width: 19px;
 	height: 19px;
 	border-top: 3px solid rgba(255, 31, 31, 0.8);
-	border-left: 3px solid rgba(255, 31, 31, 0.8);;
+	border-left: 3px solid rgba(255, 31, 31, 0.8);
 	transform:translateY(20%) rotate(45deg) ;
 }
+
+.result-value{
+	opacity: 0;
+	animation: showResultValue 0.3s linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+	animation-delay: 1s;
+}
+
+@keyframes showResultValue {
+	from {opacity: 0;}
+	to {opacity: 1;}
+  }
+
 /* ---------------------- */
 
 /* --------------accesories------------ */
@@ -194,3 +218,81 @@ body {
 ::-webkit-scrollbar-track-piece {
 	background-color: transparent;
 }
+
+
+/* pop up */
+
+.popup-background{
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .6);
+	z-index: 1;
+	display: none;
+	/* align-items: center; */
+	justify-content: center;
+	animation: showSlowlyPopUp .4s linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showSlowlyPopUp {
+	from {background-color: rgba(0, 0, 0, 0);}
+	to {background-color: rgba(0, 0, 0, .6);}
+  }
+
+.popup-box{
+	width: 778px;
+	margin-top: 20vh;
+	animation: showSlowlyPopUpBox .4s linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showSlowlyPopUpBox {
+	from {opacity: 0;}
+	to {opacity: 1;}
+  }
+
+.popup{
+	text-align: left;
+	width: 100%;
+	padding: 30px 50px 30px 100px;
+	border-radius: 7px;
+	background-color: #fff;
+	color: black;
+	position: relative;
+}
+.popup img{
+	position: absolute;
+	width: 60px;
+	left: 20px;
+	top:25px;
+}
+.popup h2{
+	font-size: 29px;
+}
+.popup p{
+	margin-top: 15px;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+
+.btn-x{
+	display: flex;
+	justify-content: end;
+}
+
+.btn-x img{
+	width: 25px;
+	margin-bottom: 20px;
+	transition: transform .3s;
+}
+.btn-x img:hover{
+	cursor: pointer;
+	transform: rotate(90deg);
+}
+
+
+

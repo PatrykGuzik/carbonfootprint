@@ -5,6 +5,7 @@
 
 .checkbox-object h3{
 	margin-bottom: 20px;
+	font-size: var(--headerQuestionSize);;
 }
 
 .checkbox-box {
