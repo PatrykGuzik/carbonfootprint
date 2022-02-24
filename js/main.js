@@ -1,3 +1,5 @@
+const serverLink = "https://guziczek772.pythonanywhere.com";
+
 let page = 1;
 if(sessionStorage.getItem("page")){
 	page = JSON.parse(sessionStorage.getItem("page"));
@@ -36,7 +38,7 @@ function hideLoading() {
 
 displayLoading();
 
-fetch("https://guziczek772.pythonanywhere.com/api/questions/?format=json")
+fetch(`${serverLink}/api/questions/?format=json`)
 	.then(response => response.json())
 	.then(data => drawForms(data));
 
@@ -123,8 +125,11 @@ function drawForms(d) {
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
-			location.href = "finish.html";
-			console.log("wysłane");
+			
+			// location.href = "finish.html"; przeniesione do save.js
+		
+			
+			
 		}
 	});
 
@@ -136,8 +141,8 @@ function drawForms(d) {
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
-			location.href = "finish.html";
-			console.log("wysłane");
+			// location.href = "finish.html";
+			
 		}
 	});
 
@@ -155,7 +160,7 @@ function drawForms(d) {
 
 
 
-	fetch("https://guziczek772.pythonanywhere.com/api/informations/?format=json")
+	fetch(`${serverLink}/api/informations/?format=json`)
 	.then(response => response.json())
 	.then(data => DrawInfo(data));
 }

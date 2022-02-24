@@ -1,14 +1,16 @@
+const serverLink = "https://guziczek772.pythonanywhere.com";
+
 const filterInput = document.querySelector(".filter-input");
 let fileName = "";
 
 function getData() {
-	fetch("https://guziczek772.pythonanywhere.com/api/answers/?format=json")
+	fetch(`${serverLink}/api/answers/?format=json`)
 		.then(response => response.json())
 		.then(data => myFunction(data));
 }
 
 function getCodeDesc() {
-	fetch("https://guziczek772.pythonanywhere.com/api/codes/?format=json")
+	fetch(`${serverLink}/api/codes/?format=json`)
 		.then(response => response.json())
 		.then(data => codeDesc(data));
 }

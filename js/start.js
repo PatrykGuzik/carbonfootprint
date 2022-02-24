@@ -31,7 +31,7 @@ function activateCodeContainer() {
 }
 
 function CheckCode(codeInput) {
-	fetch("https://guziczek772.pythonanywhere.com/api/codes/?format=json")
+	fetch("http://127.0.0.1:8000/api/codes/?format=json")
 		.then(response => response.json())
 		.then(data => Check(data, codeInput));
 }

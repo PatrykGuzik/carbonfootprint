@@ -4,7 +4,7 @@
 
 // const transport = document.querySelector(".transport")
 // transport.innerHTML = Number.parseFloat(sessionStorage.getItem('TRANSPORT')).toFixed(2);
-
+const serverLink = "https://guziczek772.pythonanywhere.com";
 //Loading---------------------------------------------------------------------------
 const loader = document.querySelector(".loading");
 
@@ -161,7 +161,7 @@ function drawStats() {
 
 // upload data
 
-fetch("https://guziczek772.pythonanywhere.com/api/informations/?format=json")
+fetch(`${serverLink}/api/informations/?format=json`)
 	.then(response => response.json())
 	.then(data => DrawInfo(data));
 

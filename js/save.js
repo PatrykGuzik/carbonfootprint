@@ -1,7 +1,7 @@
 const answersToSend = {};
 
 function getCalcValues() {
-	fetch("https://guziczek772.pythonanywhere.com/api/values/?format=json")
+	fetch(`${serverLink}/api/values/?format=json`)
 		.then(response => response.json())
 		.then(data => saveToCalcAnswers(data));
 }
@@ -15,7 +15,7 @@ function sendToBase() {
 		answers: toSendAnswers,
 		calc_answers: toSendCalcAnswers,
 	};
-	fetch("https://guziczek772.pythonanywhere.com/api/answers/?format=json", {
+	fetch(`${serverLink}/api/answers/?format=json`, {
 		method: "POST",
 		body: JSON.stringify(_data),
 		headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -23,6 +23,8 @@ function sendToBase() {
 }
 
 function saveToCalcAnswers(data) {
+
+
 	// Podsumowanie
 	let TRANSPORT = 0;
 	let ENERGIA_DOMU = 0;
@@ -829,7 +831,7 @@ function saveToCalcAnswers(data) {
 	sendToBase();
 
 	// Przekierowanie
-	// location.href="finish.html";
+	location.href="finish.html";
 
 	// console.log(answersToSend);
 	// console.log("wysłane");
