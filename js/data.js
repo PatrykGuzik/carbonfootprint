@@ -2,13 +2,13 @@ const filterInput = document.querySelector(".filter-input");
 let fileName = "";
 
 function getData() {
-	fetch("http://127.0.0.1:8000/api/answers/?format=json")
+	fetch("https://guziczek772.pythonanywhere.com/api/answers/?format=json")
 		.then(response => response.json())
 		.then(data => myFunction(data));
 }
 
 function getCodeDesc() {
-	fetch("http://127.0.0.1:8000/api/codes/?format=json")
+	fetch("https://guziczek772.pythonanywhere.com/api/codes/?format=json")
 		.then(response => response.json())
 		.then(data => codeDesc(data));
 }

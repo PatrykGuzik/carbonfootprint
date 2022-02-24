@@ -31,9 +31,9 @@ class Form {
 					form_box_inner += this.drawSliderPercent(this.jsonQuestions[i]);
 					break;
 
-				case "newinput":
-					form_box_inner += this.drawNewImputText(this.jsonQuestions[i]);
-					break;
+				// case "newinput":
+				// 	form_box_inner += this.drawNewImputText(this.jsonQuestions[i]);
+				// 	break;
 
 				default:
 					break;
@@ -75,30 +75,30 @@ class Form {
 		}
 	}
 
-	drawNewImputText(question) {
-		let subQuestions = "";
-		let numberOfSubQuestions = Object.keys(
-			question.mozliwe_odpowiedzi_pl.split(";")
-		).length;
+	// drawNewImputText(question) {
+	// 	let subQuestions = "";
+	// 	let numberOfSubQuestions = Object.keys(
+	// 		question.mozliwe_odpowiedzi_pl.split(";")
+	// 	).length;
 
-		for (let j = 0; j < numberOfSubQuestions; j++) {
-			let subQuestion = question.mozliwe_odpowiedzi_pl.split(";")[j];
-			console.log(subQuestion);
-			subQuestions += `
-				<div style="display:inline-block">
-					<div>${subQuestion}</div>
-                	<input id="${question.question_nr}" type="text" maxlength="4" class="input-object">  
-				</div>
-            `;
-		}
+	// 	for (let j = 0; j < numberOfSubQuestions; j++) {
+	// 		let subQuestion = question.mozliwe_odpowiedzi_pl.split(";")[j];
+	// 		console.log(subQuestion);
+	// 		subQuestions += `
+	// 			<div style="display:inline-block">
+	// 				<div>${subQuestion}</div>
+	//             	<input id="${question.question_nr}" type="text" maxlength="4" class="input-object">
+	// 			</div>
+	//         `;
+	// 	}
 
-		return `
-		<div class="form-object input-text-object">  
-			<h3>${question.pytanie_pl}</h3>
-			${subQuestions}
-			<p class="validate-input"> wpisz liczbę większą lub równą 0 </p>
-		</div>`;
-	}
+	// 	return `
+	// 	<div class="form-object input-text-object">
+	// 		<h3>${question.pytanie_pl}</h3>
+	// 		${subQuestions}
+	// 		<p class="validate-input"> wpisz liczbę większą lub równą 0 </p>
+	// 	</div>`;
+	// }
 
 	drawInputText(question) {
 		let header = "";
@@ -121,8 +121,6 @@ class Form {
 			header = "";
 		}
 
-		// console.log(question.etykieta);
-
 		// zmiana: question.question_nr na question.etykieta
 		return `<div class="form-object input-text-object ${this.getLastObjectClassOnPage(
 			question
@@ -141,6 +139,18 @@ class Form {
 		const inputText = document.querySelectorAll(".input-text-object");
 
 		for (let i = 0; i < Object.keys(inputText).length; i++) {
+			//-----------zapis z sesji-------------
+			const inputObject = inputText[i].querySelector(".input-object");
+			const inputObjectId = inputObject.id;
+			const ANSWERS = JSON.parse(sessionStorage.getItem("answersE"));
+
+			if (ANSWERS) {
+				if (ANSWERS[inputObjectId] != null) {
+					inputObject.value = ANSWERS[inputObjectId];
+				}
+			}
+			//-------------------------------------
+
 			inputText[i].addEventListener("input", () => {
 				const inputObject = inputText[i].querySelector(".input-object");
 				const inputObjectId = inputObject.id;
@@ -160,6 +170,8 @@ class Form {
 				inputText[i].querySelector(".validate-input").style.transform =
 					"translateY(-100%)";
 				inputText[i].querySelector(".validate-input").style.fontSize = "0px";
+
+				this.saveDataInSession();
 			});
 		}
 	}
@@ -209,6 +221,23 @@ class Form {
 		const inputRadio = document.querySelectorAll(".radio-object");
 
 		for (let i = 0; i < Object.keys(inputRadio).length; i++) {
+			//-----------zapis z sesji-------------
+			const inputObject = inputRadio[i].querySelector(".input-object");
+			const nameObject = inputObject.name;
+			const inputObjectId = inputObject.id;
+			const values = document.getElementsByName(nameObject);
+
+			const ANSWERS = JSON.parse(sessionStorage.getItem("answersE"));
+
+			// console.log(inputObjectId + " - " + ANSWERS[inputObjectId]);
+
+			if (ANSWERS) {
+				if (ANSWERS[inputObjectId] != null) {
+					values[ANSWERS[inputObjectId] - 1].checked = true;
+				}
+			}
+			//-------------------------------------
+
 			inputRadio[i].addEventListener("input", () => {
 				const inputValues = [];
 				const inputObject = inputRadio[i].querySelector(".input-object");
@@ -216,6 +245,8 @@ class Form {
 				const inputObjectId = inputObject.id;
 				const values = document.getElementsByName(nameObject);
 				let inputRadioValue = 0;
+
+				// console.log(values[0].checked = true);
 
 				values.forEach(element => {
 					inputValues.push(element.checked);
@@ -227,7 +258,6 @@ class Form {
 					}
 				}
 
-				// answers[inputObjectId - 1].answer = inputRadioValue;
 				answersE[inputObjectId] = inputRadioValue;
 
 				this.isFull();
@@ -235,6 +265,8 @@ class Form {
 				inputRadio[i].querySelector(".validate-radio").style.transform =
 					"translateY(-100%)";
 				inputRadio[i].querySelector(".validate-radio").style.fontSize = "0px";
+
+				this.saveDataInSession();
 			});
 		}
 	}
@@ -247,13 +279,12 @@ class Form {
 		for (let i = 0; i < formsOnPage.length; i++) {
 			if (answersOnPage[i] == null) {
 				const a = document.querySelector(`.${formsOnPage[i]}`);
-			
+
 				if (a.classList.contains("radio-object")) {
 					const b = a.querySelector(".validate-radio");
 					b.style.opacity = "1";
 					b.style.transform = "translateY(0)";
 					b.style.fontSize = "14px";
-					
 				}
 
 				if (a.classList.contains("input-text-object")) {
@@ -262,7 +293,6 @@ class Form {
 					b.style.transform = "translateY(0)";
 					b.style.fontSize = "14px";
 				}
-
 			}
 		}
 	}
@@ -296,27 +326,11 @@ class Form {
 		const answersOnPage = [];
 
 		for (let i = 0; i < formsOnPage.length; i++) {
-			// answers.forEach(element => {
-			// 	if (element.id == formsOnPage[i]) {
-			// 		answersOnPage.push(element.answer);
-			// 	}
-			// });
-
-			// console.log(answersE[formsOnPage[i]]);
 			if (answersE[formsOnPage[i]] != null) {
 				answersOnPage.push(answersE[formsOnPage[i]]);
 			} else {
 				answersOnPage.push(null);
 			}
-
-			// for (let j = 0; j < Object.keys(answersE).length; j++) {
-			// 	if (Object.keys(answersE)[j] == formsOnPage[i]) {
-			// 		answersOnPage[i] = (Object.values(answersE)[i]);
-
-			// 	}
-
-			// 	console.log("--" + Object.values(answersE)[i]);
-			// }
 		}
 		return answersOnPage;
 	}
@@ -334,7 +348,9 @@ class Form {
 				<span class="checkmark"></span>
             </label>`;
 		}
-		return `<div class="form-object checkbox-object ${this.getLastObjectClassOnPage(question)}">  
+		return `<div class="form-object checkbox-object ${this.getLastObjectClassOnPage(
+			question
+		)}">  
 					<h3>${question.pytanie_pl}</h3> 
 					<div class="checkbox-box">
                     	${subQuestions}
@@ -351,6 +367,22 @@ class Form {
 			const inputObjectId = inputObject.id;
 			const nameObject = inputObject.name;
 			const values = document.getElementsByName(nameObject);
+
+			//-----------zapis z sesji-------------
+			const ANSWERS = JSON.parse(sessionStorage.getItem("answersE"));
+
+			// console.log(inputObjectId + " - " + ANSWERS[inputObjectId]);
+
+			if (ANSWERS) {
+				if (ANSWERS[inputObjectId] != null) {
+					answersE = JSON.parse(sessionStorage.getItem("answersE"));
+					for (let i = 0; i < ANSWERS[inputObjectId].length; i++) {
+						values[i].checked = ANSWERS[inputObjectId][i];
+					}
+					
+				}
+			}
+			//-------------------------------------
 
 			values.forEach(element => {
 				inputValues.push(element.checked);
@@ -369,6 +401,7 @@ class Form {
 				answersE[inputObjectId] = inputValues;
 
 				this.isFull();
+				this.saveDataInSession()
 			});
 		}
 	}
@@ -424,6 +457,33 @@ class Form {
 			const sliderValue = inputSliders[i].querySelector(".slider-value");
 			const inputObjectId = inputObject.id;
 
+			//-----------zapis z sesji-------------
+			const sliderDescribe = inputSliders[i].querySelector(".slider-describe");
+			sliderValue.value = inputObject.value;
+			const sliderObjectsList = [];
+
+			for (let j = 0; j < Object.keys(this.jsonQuestions).length; j++) {
+				if (this.jsonQuestions[j].typ_pytania == "range") {
+					sliderObjectsList.push(this.jsonQuestions[j]);
+				}
+			}
+			sliderValue.innerHTML =
+				sliderObjectsList[i].mozliwe_odpowiedzi_pl.split(";")[
+					inputObject.value - 1
+				];
+			sliderDescribe.innerHTML =
+				sliderObjectsList[i].range_pl_opis.split(";")[inputObject.value - 1];
+
+			
+			const ANSWERS = JSON.parse(sessionStorage.getItem("answersE"));
+
+			if (ANSWERS) {
+				if (ANSWERS[inputObjectId] != null) {
+					inputObject.value = ANSWERS[inputObjectId];
+				}
+			}
+			//-------------------------------------
+
 			inputSliders[i].addEventListener("input", () => {
 				const sliderDescribe =
 					inputSliders[i].querySelector(".slider-describe");
@@ -448,6 +508,7 @@ class Form {
 				answersE[inputObjectId] = parseInt(inputObject.value, 10);
 
 				this.isFull();
+				this.saveDataInSession();
 			});
 
 			// answers[inputObjectId - 1].answer = parseInt(inputObject.value, 10);
@@ -490,6 +551,16 @@ class Form {
 		for (let i = 0; i < Object.keys(inputSlidersPercent).length; i++) {
 			const inputObject = inputSlidersPercent[i].querySelector(".input-object");
 			const inputObjectId = inputObject.id;
+			const sliderValue = inputSlidersPercent[i].querySelector(".slider-percent-value");
+
+			const ANSWERS = JSON.parse(sessionStorage.getItem("answersE"));
+			sliderValue.innerHTML = `${inputObject.value}%`;
+
+			if (ANSWERS) {
+				if (ANSWERS[inputObjectId] != null) {
+					inputObject.value = ANSWERS[inputObjectId]*100;
+				}
+			}
 
 			inputSlidersPercent[i].addEventListener("input", () => {
 				const sliderValue = inputSlidersPercent[i].querySelector(
@@ -497,11 +568,14 @@ class Form {
 				);
 
 				sliderValue.value = inputObject.value;
+				console.log(inputObject.value);
 
 				sliderValue.innerHTML = `${inputObject.value}%`;
 
 				this.isFull();
 				answersE[inputObjectId] = parseInt(inputObject.value, 10) / 100;
+
+				this.saveDataInSession()
 			});
 			// answers[inputObjectId - 1].answer = parseInt(inputObject.value, 10) / 100;
 			answersE[inputObjectId] = parseInt(inputObject.value, 10) / 100;
@@ -529,5 +603,9 @@ class Form {
 			}
 		}
 		return listQuestionsOnPage;
+	}
+
+	saveDataInSession() {
+		sessionStorage.setItem("answersE", JSON.stringify(answersE));
 	}
 }

@@ -161,7 +161,7 @@ function drawStats() {
 
 // upload data
 
-fetch("http://127.0.0.1:8000/api/informations/?format=json")
+fetch("https://guziczek772.pythonanywhere.com/api/informations/?format=json")
 	.then(response => response.json())
 	.then(data => DrawInfo(data));
 

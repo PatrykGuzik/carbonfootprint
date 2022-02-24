@@ -1,4 +1,9 @@
 let isCode = false;
+if(sessionStorage.getItem("answersE")){
+	sessionStorage.removeItem("answersE");
+}
+
+sessionStorage.setItem("page", 1);
 
 function approve() {
 	const codeInputValue = document.querySelector(".code-input").value;
@@ -26,7 +31,7 @@ function activateCodeContainer() {
 }
 
 function CheckCode(codeInput) {
-	fetch("http://127.0.0.1:8000/api/codes/?format=json")
+	fetch("https://guziczek772.pythonanywhere.com/api/codes/?format=json")
 		.then(response => response.json())
 		.then(data => Check(data, codeInput));
 }

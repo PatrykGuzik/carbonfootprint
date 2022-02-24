@@ -1,4 +1,7 @@
 let page = 1;
+if(sessionStorage.getItem("page")){
+	page = JSON.parse(sessionStorage.getItem("page"));
+}
 let pages = {};
 let answers = [];
 let answersE = {};
@@ -33,24 +36,19 @@ function hideLoading() {
 
 displayLoading();
 
-fetch("http://127.0.0.1:8000/api/questions/?format=json")
+fetch("https://guziczek772.pythonanywhere.com/api/questions/?format=json")
 	.then(response => response.json())
 	.then(data => drawForms(data));
 
-fetch("http://127.0.0.1:8000/api/informations/?format=json")
-	.then(response => response.json())
-	.then(data => DrawInfo(data));
-
 function DrawInfo(d) {
-	console.log("info załadowane");
 	info = new Info(d, ".info-box");
 	info.drawInfo();
+
 
 	const allFormObjects = document.querySelectorAll(".form-object");
 	const infoBox = document.querySelector(".info-box");
 	for (let i = 0; i < Object.keys(allFormObjects).length; i++) {
 		allFormObjects[i].addEventListener("input", () => {
-			console.log("show");
 			showAndHiddenInfo(d);
 			infoBox.style.opacity = "1";
 		});
@@ -72,10 +70,11 @@ function DrawInfo(d) {
 	});
 }
 
+
 function drawForms(d) {
 	setTimeout(() => {
 		hideLoading();
-	}, 600);
+	}, 0);
 
 	let numbersOfQuestions = Object.keys(d).length;
 	//TODO: zmienić sposób ustalania ostatniej strony
@@ -84,6 +83,17 @@ function drawForms(d) {
 	nrQuestionsInCategory = getNrQuestionsInCategory(d);
 
 	makePlaceForAnswers(d);
+
+	if(sessionStorage.getItem("answersE")){
+		answersE = JSON.parse(sessionStorage.getItem("answersE"));
+	}
+
+	
+
+	console.log(answersE);
+
+	
+
 	makePagesNrForView(numbersOfPages);
 
 	form = new Form(d, ".form-box");
@@ -102,12 +112,14 @@ function drawForms(d) {
 	bntLeft.addEventListener("click", () => {
 		if (page > 1) {
 			changePageIfIsValidateLeft(form ,d, all_form_objects, numbersOfPages);
+			sessionStorage.setItem("page", JSON.stringify(page));
 		}
 	});
 
 	bntRight.addEventListener("click", () => {
 		if (page < numbersOfPages) {
 			changePageIfIsValidateRight(form, d, all_form_objects, numbersOfPages);
+			sessionStorage.setItem("page", JSON.stringify(page));
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
@@ -120,6 +132,7 @@ function drawForms(d) {
 		if (page < numbersOfPages) {
 			changePageIfIsValidateRight(form, d, all_form_objects, numbersOfPages);
 			console.log(answersE);
+			sessionStorage.setItem("page", JSON.stringify(page));
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
@@ -138,6 +151,13 @@ function drawForms(d) {
 		}
 		// getNrQuestionsInCategory(d);
 	});
+
+
+
+
+	fetch("https://guziczek772.pythonanywhere.com/api/informations/?format=json")
+	.then(response => response.json())
+	.then(data => DrawInfo(data));
 }
 
 //---------------------------------------------------------------------------------
@@ -242,6 +262,13 @@ function showAndHiddenInfo(infoDate) {
 		} else {
 			all_info_objects[i].style.display = "none";
 		}
+	}
+}
+
+function showInfoTest(infoDate){
+	const all_info_objects = document.querySelectorAll(".info-object");
+	for (let i = 0; i < infoDate.length; i++) {
+		all_info_objects[i].style.display = "block";
 	}
 }
 
