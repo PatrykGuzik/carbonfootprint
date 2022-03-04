@@ -145,15 +145,14 @@ function drawForms(d) {
 	});
 
 	// PRZYCISK TYMCZASOWY
-	const bntTemp = document.querySelector(".btn-tmp");
-	bntTemp.addEventListener("click", () => {
-		if (page) {
-			updateView(form, d, all_form_objects, numbersOfPages);
-			getCalcValues();
-			console.log("wysłane");
-		}
-		// getNrQuestionsInCategory(d);
-	});
+	// const bntTemp = document.querySelector(".btn-tmp");
+	// bntTemp.addEventListener("click", () => {
+	// 	if (page) {
+	// 		updateView(form, d, all_form_objects, numbersOfPages);
+	// 		getCalcValues();
+	// 		console.log("wysłane");
+	// 	}
+	// });
 
 
 
