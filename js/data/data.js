@@ -1,5 +1,3 @@
-const serverLink = "https://guziczek772.pythonanywhere.com";
-
 const filterInput = document.querySelector(".filter-input");
 let fileName = "";
 

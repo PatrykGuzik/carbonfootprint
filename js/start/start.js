@@ -1,4 +1,3 @@
-const serverLink = "https://guziczek772.pythonanywhere.com";
 let isCode = false;
 if(sessionStorage.getItem("answersE")){
 	sessionStorage.removeItem("answersE");

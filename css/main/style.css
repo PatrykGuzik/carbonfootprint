@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;700;900&display=swap');
 
 :root{
-	--bgImage: url(../img/transport.jpg);
+	--bgImage: url(../../img/transport.jpg);
 	--fontColor: rgb(255, 255, 255);
 	--headerQuestionSize: 22px;
 }

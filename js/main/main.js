@@ -1,5 +1,3 @@
-const serverLink = "https://guziczek772.pythonanywhere.com";
-
 let page = 1;
 if(sessionStorage.getItem("page")){
 	page = JSON.parse(sessionStorage.getItem("page"));

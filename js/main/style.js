@@ -1,38 +1,38 @@
 const settings = 
 {'Transport':
-    {'--bgImage':'url(../img/transport.jpg)',
+    {'--bgImage':'url(../../img/transport.jpg)',
     '--formColor':'rgba(255, 255, 255, 0.5)',
     '--fontColor':'rgb(0, 0, 0)',
     '--mainRadioColor':'rgb(0, 0, 0)'}
 }
 
 function setStyleTransport() {
-    document.documentElement.style.setProperty('--bgImage', 'url(../img/transport.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/transport.jpg)');
     darkTheme();
 }
 
 function setStyleHomeEnergy() {
-    document.documentElement.style.setProperty('--bgImage', 'url(../img/home_energy.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/home_energy.jpg)');
     darkTheme();
 }
 
 function setStyleWaste(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../img/waste.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/waste.jpg)');
     darkTheme();
 }
 
 function setStyleFood(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../img/food.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/food.jpg)');
     darkTheme();
 }
 
 function setStyleFreeTime(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../img/entertainment.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/entertainment.jpg)');
     darkTheme();
 }
 
 function setStyleConsumption(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../img/lifestyle.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/lifestyle.jpg)');
     darkTheme();
 }
 

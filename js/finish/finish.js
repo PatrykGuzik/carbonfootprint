@@ -1,12 +1,8 @@
-// const code = sessionStorage.getItem('code');
-
-// console.log(code);
-
-// const transport = document.querySelector(".transport")
-// transport.innerHTML = Number.parseFloat(sessionStorage.getItem('TRANSPORT')).toFixed(2);
-const serverLink = "https://guziczek772.pythonanywhere.com";
+// const serverLink = "http://127.0.0.1:8000";
 //Loading---------------------------------------------------------------------------
 const loader = document.querySelector(".loading");
+
+let chosenDetail = "null";
 
 function displayLoading() {
 	loader.classList.add("display");
@@ -22,7 +18,7 @@ function hideLoading() {
 		loader.classList.remove("display");
 		drawStats();
 		window.setTimeout("showPopUp()", 2000);
-	}, 1000);
+	}, 0);
 	
 }
 
@@ -30,10 +26,13 @@ displayLoading();
 
 // ----dane---
 const SWIAT = 4.9;
-const POLSKA = 9;
+const POLSKA = 8;
 const KIRGISTAN = 13;
 const SUDAN = 7.1;
 const ROSJA = 10.5;
+const USA = 14.2;
+const CHINY = 7.4;
+const MEKSYK = 2.7;
 
 const ANSWERS = JSON.parse(sessionStorage.getItem("answers"));
 // zmienic na const
@@ -47,7 +46,7 @@ let CZAS_WOLNY = Number.parseFloat(sessionStorage.getItem("CZAS_WOLNY") / 1000);
 let KONSUMPCJA = Number.parseFloat(sessionStorage.getItem("KONSUMPCJA") / 1000);
 
 //Dev
-// TRANSPORT = 3.5;
+// TRANSPORT = 3;
 // ODPADY = 1.2;
 // ENERGIA_DOMU = 0.3;
 // JEDZENIE = 2.3;
@@ -70,15 +69,17 @@ const detailsList = {
 	KONSUMPCJA: KONSUMPCJA,
 };
 
+
+console.log(detailsList);
+
 const statsList = {
 	"Twój wynik": SUMA,
-	Świat: 4.9,
-	Polska: 8,
-	Chiny: 7.4,
-	USA: 14.2,
-	Meksyk: 2.7,
+	Świat: SWIAT,
+	Polska: POLSKA,
+	Chiny: CHINY,
+	USA: USA,
+	Meksyk: MEKSYK,
 };
-console.log("suma: " + SUMA);
 
 const ratingGood = "Jest dobrze! Emitujesz mniej niż przeciętny Polak.";
 const ratingMid = "No tak średnio bym powiedział.";
@@ -155,81 +156,55 @@ function drawStats() {
 	}
 
 	details.innerHTML = detailsInner;
-}
 
-// ----------------------------slider-------------------------------
 
-// upload data
+// ______________CLICK STATS______________
+	const results = details.querySelectorAll(".result")
 
-fetch(`${serverLink}/api/informations/?format=json`)
-	.then(response => response.json())
-	.then(data => DrawInfo(data));
+	results.forEach(element => {
+		element.addEventListener("click",()=>{
+			removeActiveClass()
 
-function DrawInfo(d) {
+			element.classList.add("result-active")
+			chosenDetail = element.querySelector(".result-describe").innerHTML;
+		})
+	});
 
-	hideLoading();
-
-	const mediaScroller = document.querySelector(".media-scroller");
-
-	let mediaScrollerInner = "";
-
-	for (let i = 0; i < Object.keys(d).length; i++) {
-		mediaScrollerInner += ` <div class="media-element">
-                                <div class="info">
-
-                                    <div class="info-content">
-                                        <h3>Czy wiesz że...</h3>
-                                        <p>${d[i].informacja_pl}</p>
-                                    </div>
-
-                                    <img src="img/path869.png" alt="">
-                                
-                                </div>
-
-                            </div>`;
+	function removeActiveClass(){
+		results.forEach(element => {
+			element.classList.remove("result-active")
+		})
 	}
-
-	mediaScroller.innerHTML = mediaScrollerInner;
-
-	const btnLeft = document.querySelector(".btn-left");
-	const btnRight = document.querySelector(".btn-right");
-
-	btnRight.addEventListener("click", () => {
-		mediaScroller.scrollLeft += document.body.clientWidth * 0.75;
-	});
-
-	btnLeft.addEventListener("click", () => {
-		mediaScroller.scrollLeft -= document.body.clientWidth * 0.75;
-	});
-
-	const bigInfoContainer = document.querySelector(".big-info-container");
-	const infoBtn = document.querySelector(".info-btn");
-	const bigInfo = document.querySelector(".big-info");
 }
 
-//------------------popup-------------------
 
-const popupBackground = document.querySelector(".popup-background");
-const popup = document.querySelector(".btn-x");
-
-// window.setTimeout("showPopUp()", 2000);
-
-popupBackground.addEventListener("click", () => {
-	hidePopUp();
-});
-
-const btnTip = document.querySelector(".btn-tip");
-btnTip.addEventListener("click", () => {
-	showPopUp();
-});
-
-function showPopUp() {
-	popupBackground.style.display = "flex";
-}
-function hidePopUp() {
-	popupBackground.style.display = "none";
+// 3 najbardziej emisyjne aktywności
+let theBiggest = getBiggest(detailsList,6);
+if (TRANSPORT == 0){
+	theBiggest = getBiggest(detailsList,5);
 }
 
-// _______________________FUNCTIONS____________________________
 
-function getTheBiggestAnswers(count) {}
+
+// _______________________FUNCTIONS__________________________
+
+function getBiggest(obj, count){
+	jsonObj = Object.assign({}, obj);
+	theBiggests = [];
+	
+	for(let i=0; i<count ;i++){
+	  let theBiggest = 0;
+	  let theBiggestName = '';
+	  
+	  for(let i=0; i< Object.keys(jsonObj).length ;i++){
+		if (jsonObj[Object.keys(jsonObj)[i]] > theBiggest){
+		theBiggest = jsonObj[Object.keys(jsonObj)[i]];
+		theBiggestName = Object.keys(jsonObj)[i];
+		};
+	  }
+	  delete jsonObj[theBiggestName];
+	  theBiggests.push(theBiggestName)
+	}
+	
+	return theBiggests;
+  }
