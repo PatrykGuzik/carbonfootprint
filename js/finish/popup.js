@@ -23,7 +23,7 @@ function hidePopUp() {
 // zawartość POP-UP
 const nameOfVariables = {JEDZENIE:"Jedzenie","ENERGIA DOMU":"Energia domu", "TRANSPORT":"Transport", "CZAS WOLNY":"Czas wolny", KONSUMPCJA:"Konsumpcja", ODPADY:"Odpady"};
 
-let innerPopUp = '<h4>Lorem ipsum</h4>';
+let innerPopUp = '<h4>Rekomendujemy</h4>';
 
 // 3 najbardziej emisyjne aktywności
 // let theBiggest = getBiggest(detailsList,6);
@@ -52,7 +52,7 @@ theBiggestSum = theBiggestSum;
 let theBiggestPercent = 100*theBiggestSum/SUMA;
 theBiggestPercent = Number.parseFloat(theBiggestPercent).toFixed(1);
 
-innerPopUp += `<p>dolor mit amet</p>`;
+innerPopUp += `<p>Sprawdź co możesz zrobić</p>`;
 innerPopUp += accordionStart;
 
 // żarówka
