@@ -455,16 +455,12 @@ class Form {
 		)}">  
                     ${header}
                     ${subQuestion}
-					
-						<div class="slider-value">${
-												subQuestions[middleValue]
-											}</div></br>
-					<div class="slider-container">						
-						<input id="${
-												question.etykieta
-											}" type="range" min="1" max="${numberOfSubQuestions}" class="input-object slider"> 
-						<div class="progress-bar"></div>
-					</div>						
+                    <div class="slider-value">${
+											subQuestions[middleValue]
+										}</div></br>
+                    <input id="${
+											question.etykieta
+										}" type="range" min="1" max="${numberOfSubQuestions}" class="input-object slider"> 
                     <p class="slider-describe">${describes[middleValue]}</p>
                 </div>`;
 	}

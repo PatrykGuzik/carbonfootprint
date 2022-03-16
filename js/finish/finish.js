@@ -86,7 +86,7 @@ const statsList = {
 };
 
 const ratingGood = "Jest dobrze! Emitujesz mniej niż przeciętny Polak.";
-const ratingMid = "No tak średnio bym powiedział.";
+const ratingMid = "Jest nie najlepiej. Twoje emisje są zbliżone do emisji przeciętnego Polaka";
 const ratingBad =
 	"Jest bardzo źle! Emitujesz rocznie więcej CO2 niż statystyczny Polak.";
 
