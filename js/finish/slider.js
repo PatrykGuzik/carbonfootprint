@@ -1,6 +1,10 @@
-fetch(`${serverLink}/api/informations/?format=json`)
+
+function drawSlider(){
+	fetch(`${serverLink}/api/informations/?format=json`)
 	.then(response => response.json())
 	.then(data => DrawInfo(data));
+}
+drawSlider()
 
 function DrawInfo(d) {
 	const mediaScroller = document.querySelector(".media-scroller");
@@ -8,7 +12,7 @@ function DrawInfo(d) {
 	let mediaScrollerInner = "";
 
 	for (let i = 0; i < Object.keys(d).length; i++) {
-		mediaScrollerInner += ` <div class="media-element">
+		mediaScrollerInner += ` <div class="media-element cat-${d[i].kategoria}">
                                 <div class="info">
 
                                     <div class="info-content">
@@ -45,25 +49,4 @@ function DrawInfo(d) {
 		.then(data => DrawRecommendation(data));
 }
 
-function DrawRecommendation(d) {
-	hideLoading();
-	console.log(d);
-	console.log(getRecByName("T_samochod"));
 
-	recommendationsByCat["TRANSPORT"] = `<p>${getRecByName("T_samochod")}</p> <p>${getRecByName("T_samolot")}</p>`;
-	recommendationsByCat["JEDZENIE"]  = `<p class="red-border">${getRecByName("J_zwierz")}</p>`;
-	recommendationsByCat["ENERGIA DOMU"]  =`<p class="red-border">${getRecByName("E_ocieplenie")}</p><p>${getRecByName("E_ocieplenie")}</p>`;
-	recommendationsByCat["CZAS WOLNY"]  =`<p>${getRecByName("C_organizowane")}</p>`;
-	recommendationsByCat["KONSUMPCJA"]  =`<p>${getRecByName("K_ubrania")}</p>`;
-	recommendationsByCat["ODPADY"]  =`<p>${getRecByName("O_odpady")}</p>`;
-
-	// dodać 
-
-	function getRecByName(name) {
-		for (let i = 0; i < d.length; i++) {
-			if (d[i].name == name) {
-				return d[i].rekomendacja_pl;
-			}
-		}
-	}
-}

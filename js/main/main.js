@@ -1,3 +1,9 @@
+//przekierowanie:
+if (!sessionStorage.getItem("code")) {
+	location.href="index.html";
+}
+
+
 let page = 1;
 if(sessionStorage.getItem("page")){
 	page = JSON.parse(sessionStorage.getItem("page"));
@@ -136,6 +142,7 @@ function drawForms(d) {
 			changePageIfIsValidateRight(form, d, all_form_objects, numbersOfPages);
 			console.log(answersE);
 			sessionStorage.setItem("page", JSON.stringify(page));
+			console.log("page:",page);
 		} else {
 			updateView(form, d, all_form_objects, numbersOfPages);
 			getCalcValues();
@@ -152,6 +159,7 @@ function drawForms(d) {
 	// 		getCalcValues();
 	// 		console.log("wysłane");
 	// 	}
+	// 	// getNrQuestionsInCategory(d);
 	// });
 
 

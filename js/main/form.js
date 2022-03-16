@@ -61,6 +61,22 @@ class Form {
 		// TRANSPORT (Ile km przejeżdżasz jednośladem?)
 		if (answersE["T_motor"] > 0) this._setStatusPages([6, 7], true);
 		else this._setStatusPages([6, 7], false);
+
+		// TRANSPORT (Ile razy leciałeś_aś samolotem?)
+		if (answersE["T_samolot"] > 0 ) this._setStatusPages([9], true);
+		else this._setStatusPages([9], false);
+
+		// ENERGIA DOMU (Ile razy w tygodniu bierzesz prysznic?)
+		if (answersE["E_prysznicIle"] > 0 ) this._setStatusPages([17], true);
+		else this._setStatusPages([17], false);
+
+		// CZAS WOLNY (Ile dni w roku spędzasz na wakacjach?)
+		if (answersE["C_dniWakacji"] > 0 ) this._setStatusPages([28], true);
+		else this._setStatusPages([28], false);
+
+		// KONSUMPCJA (Ile nowych ubrań kupujesz w ciągu roku?)
+		if (answersE["K_noweUbrania"] > 0 ) this._setStatusPages([35], true);
+		else this._setStatusPages([35], false);
 	}
 
 	_setStatusPages(listOfPages, status) {
@@ -439,12 +455,16 @@ class Form {
 		)}">  
                     ${header}
                     ${subQuestion}
-                    <div class="slider-value">${
-											subQuestions[middleValue]
-										}</div></br>
-                    <input id="${
-											question.etykieta
-										}" type="range" min="1" max="${numberOfSubQuestions}" class="input-object slider"> 
+					
+						<div class="slider-value">${
+												subQuestions[middleValue]
+											}</div></br>
+					<div class="slider-container">						
+						<input id="${
+												question.etykieta
+											}" type="range" min="1" max="${numberOfSubQuestions}" class="input-object slider"> 
+						<div class="progress-bar"></div>
+					</div>						
                     <p class="slider-describe">${describes[middleValue]}</p>
                 </div>`;
 	}

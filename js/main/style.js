@@ -12,27 +12,27 @@ function setStyleTransport() {
 }
 
 function setStyleHomeEnergy() {
-    document.documentElement.style.setProperty('--bgImage', 'url(../../img/home_energy.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/energia_domu.jpg)');
     darkTheme();
 }
 
 function setStyleWaste(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../../img/waste.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/odpady.jpg)');
     darkTheme();
 }
 
 function setStyleFood(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../../img/food.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/jedzenie.jpg)');
     darkTheme();
 }
 
 function setStyleFreeTime(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../../img/entertainment.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/czas_wolny.jpg)');
     darkTheme();
 }
 
 function setStyleConsumption(){
-    document.documentElement.style.setProperty('--bgImage', 'url(../../img/lifestyle.jpg)');
+    document.documentElement.style.setProperty('--bgImage', 'url(../../img/konsumpcja.jpg)');
     darkTheme();
 }
 

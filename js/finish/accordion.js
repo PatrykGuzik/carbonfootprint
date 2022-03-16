@@ -17,7 +17,6 @@ const recommendationsByCat = {
 	"KONSUMPCJA": 'kon',
 };
 
-console.log(recommendationsByCat[theBiggest[0]]);
 
 let buttons = ["but1", "but2", "but3", "but4"];
 function getAccordion(accordion) {

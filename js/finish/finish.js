@@ -1,4 +1,7 @@
-// const serverLink = "http://127.0.0.1:8000";
+// Przekierowanie
+if (!sessionStorage.getItem("answers")) {
+	location.href="index.html";
+}
 //Loading---------------------------------------------------------------------------
 const loader = document.querySelector(".loading");
 
@@ -17,7 +20,7 @@ function hideLoading() {
 	setTimeout(() => {
 		loader.classList.remove("display");
 		drawStats();
-		window.setTimeout("showPopUp()", 2000);
+		// window.setTimeout("showPopUp()", 2000);
 	}, 0);
 	
 }
@@ -35,6 +38,8 @@ const CHINY = 7.4;
 const MEKSYK = 2.7;
 
 const ANSWERS = JSON.parse(sessionStorage.getItem("answers"));
+const ANSWERSE = JSON.parse(sessionStorage.getItem("answersE"));
+console.log(ANSWERSE);
 // zmienic na const
 let TRANSPORT = Number.parseFloat(sessionStorage.getItem("TRANSPORT") / 1000);
 let ODPADY = Number.parseFloat(sessionStorage.getItem("ODPADY") / 1000);
@@ -70,7 +75,6 @@ const detailsList = {
 };
 
 
-console.log(detailsList);
 
 const statsList = {
 	"Twój wynik": SUMA,
@@ -160,11 +164,16 @@ function drawStats() {
 
 // ______________CLICK STATS______________
 	const results = details.querySelectorAll(".result")
+	const mediaScroller = document.querySelector(".media-scroller");
+	let activeResult = "null"
+
 
 	results.forEach(element => {
 		element.addEventListener("click",()=>{
 			removeActiveClass()
+			activeResult = element.querySelector(".result-describe").innerHTML
 
+			hideNotActive()
 			element.classList.add("result-active")
 			chosenDetail = element.querySelector(".result-describe").innerHTML;
 		})
@@ -175,14 +184,78 @@ function drawStats() {
 			element.classList.remove("result-active")
 		})
 	}
+
+	function hideNotActive(){
+		hiddenAllElements()
+		const infoElements = mediaScroller.querySelectorAll(".media-element")
+		infoElements.forEach(element => {
+			showElement(element, activeResult)
+		});
+		
+	}
+
+	function showElement(element, category){
+
+		switch (category) {
+			case "TRANSPORT":
+				if (element.classList.contains("cat-transport")) {
+					element.style.display = "block";
+				}
+				break;
+
+			case "ODPADY":
+				if (element.classList.contains("cat-odpady")) {
+					element.style.display = "block";
+				}
+				break;
+
+			case "ENERGIA DOMU":
+				if (element.classList.contains("cat-energia_domu")) {
+					element.style.display = "block";
+				}
+				break;
+
+			case "JEDZENIE":
+				if (element.classList.contains("cat-jedzenie")) {
+					element.style.display = "block";
+				}
+				break;
+			case "CZAS WOLNY":
+				if (element.classList.contains("cat-czas_wolny")) {
+					element.style.display = "block";
+				}
+				break;
+			case "KONSUMPCJA":
+				if (element.classList.contains("cat-konsumpcja")) {
+					element.style.display = "block";
+				}
+				break;
+		}
+		
+	}
+
+	function hiddenAllElements(){
+		const infoElements = mediaScroller.querySelectorAll(".media-element")
+		infoElements.forEach(element => {
+			
+			element.style.display = "none";
+			
+		});
+	}
+
 }
 
 
-// 3 najbardziej emisyjne aktywności
-let theBiggest = getBiggest(detailsList,6);
-if (TRANSPORT == 0){
-	theBiggest = getBiggest(detailsList,5);
-}
+// najbardziej emisyjne aktywności
+let theBiggestLenght=0;
+getBiggest(detailsList,6).forEach(element => {
+	if(element != ""){
+		theBiggestLenght +=1
+	}
+});
+
+let theBiggest = getBiggest(detailsList,theBiggestLenght);
+
 
 
 
