@@ -57,6 +57,14 @@
 	border: 3px solid var(--rangeWhellColor);
 	border-radius: 50%;
 }
+.slider::-moz-range-thumb {
+	-webkit-appearance: none;
+	width: 30px;
+	height: 30px;
+	background: var(--rangeColor);
+	border: 3px solid var(--rangeWhellColor);
+	border-radius: 50%;
+  }
 
 
 

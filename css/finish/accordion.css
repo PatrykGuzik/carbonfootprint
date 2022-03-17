@@ -144,6 +144,10 @@
 		width: 0px;
 		height: 0;
 	}
+	.accordion ::-moz-scrollbar {
+		width: 0px;
+		height: 0;
+	}
 }
 
 @media (min-width: 577px) and (max-width: 786px) {
@@ -160,6 +164,10 @@
 	}
 
 	.accordion ::-webkit-scrollbar {
+		width: 0px;
+		height: 0;
+	}
+	.accordion ::-moz-scrollbar {
 		width: 0px;
 		height: 0;
 	}

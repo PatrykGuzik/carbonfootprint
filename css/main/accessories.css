@@ -62,9 +62,11 @@
 
 .logo {
 	height: 40px;
+	margin: 5px;
 }
 
 .btn-support {
+	margin-top: 5px;
 	font-size: 14px;
 	padding: 6px 10px;
 	background-color: #4d8748;
