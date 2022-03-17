@@ -1,1 +1,1 @@
-const serverLink = "http://127.0.0.1:8000";
+const serverLink = "https://footprintcalculator.pythonanywhere.com";
