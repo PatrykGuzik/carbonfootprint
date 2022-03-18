@@ -26,6 +26,7 @@
 	background-color: var(--formColor);
 	display: inline-block;
 	border-radius: 7px;
+	text-align: justify;
 }
 
 .form-box {
@@ -155,6 +156,7 @@ li:not(:nth-child(1)) {
 	max-width: 90%;
 	margin-top: 10px;
 	margin-bottom: 20px;
+	text-align: justify;
 }
 
 .last-on-page {
