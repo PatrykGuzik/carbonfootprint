@@ -7,6 +7,15 @@
 	border-radius: 7px;
 }
 
+.accordion ul{
+	margin: 0;
+	padding: 0;
+}
+
+.accordion li{
+	list-style: none;
+}
+
 .accordion .nav {
 	position: absolute;
 	display: flex;
