@@ -1,1 +1,1 @@
-const serverLink = "http://footprintcalculator.pythonanywhere.com/";
+const serverLink = "http://footprintcalculator.pythonanywhere.com";

@@ -16,7 +16,7 @@ function DrawInfo(d) {
                                 <div class="info">
 
                                     <div class="info-content">
-                                        <h3>Czy wiesz że...</h3>
+                                        <h3>Czy wiesz, że...</h3>
                                         <p>${d[i].informacja_pl}</p>
                                     </div>
 

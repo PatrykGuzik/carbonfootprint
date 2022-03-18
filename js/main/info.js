@@ -17,7 +17,7 @@ class Info {
                     <img class="info-img" src="img/path869.png" alt="">
                 </div>
                 <div class="info-content">
-                    <h4>Czy wiesz że...</h4>
+                    <h4>Czy wiesz, że...</h4>
                     <p>${this.jsonInfo[i].informacja_pl}</p>
                 </div>
             </div>
